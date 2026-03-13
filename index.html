@@ -423,10 +423,18 @@ function render() {
       </div>
     `;
     div.dataset.msg = msg;
+    if (multiMode) div.classList.add('selectable');
+    if (multiMode && selectedMsgs.has(msg)) div.classList.add('selected');
     div.addEventListener('click', (e) => {
       if (!multiMode) return;
       if (e.target.closest('.copy-btn')) return;
-      div.classList.toggle('selected');
+      if (selectedMsgs.has(msg)) {
+        selectedMsgs.delete(msg);
+        div.classList.remove('selected');
+      } else {
+        selectedMsgs.add(msg);
+        div.classList.add('selected');
+      }
       updateSelCount();
     });
     grid.appendChild(div);
@@ -438,28 +446,31 @@ render();
 
 // 다중선택
 let multiMode = false;
+const selectedMsgs = new Set();
+
 function toggleMulti() {
   multiMode = !multiMode;
   const btn = document.getElementById('multiBtn');
   btn.classList.toggle('active', multiMode);
   btn.textContent = multiMode ? '✕ 선택 종료' : '☑️ 다중선택';
-  document.querySelectorAll('.card').forEach(c => {
-    c.classList.toggle('selectable', multiMode);
-    if (!multiMode) c.classList.remove('selected');
-  });
-  if (!multiMode) updateSelCount();
+  if (!multiMode) {
+    selectedMsgs.clear();
+    updateSelCount();
+  }
+  render();
 }
 function updateSelCount() {
-  const sel = document.querySelectorAll('.card.selected').length;
+  const sel = selectedMsgs.size;
   document.getElementById('selCount').textContent = sel;
   document.getElementById('multiBar').classList.toggle('visible', sel > 0);
 }
 function clearSelection() {
+  selectedMsgs.clear();
   document.querySelectorAll('.card.selected').forEach(c => c.classList.remove('selected'));
   updateSelCount();
 }
 function copySelected(btn) {
-  const msgs = [...document.querySelectorAll('.card.selected')].map(c => c.dataset.msg);
+  const msgs = [...selectedMsgs];
   if (!msgs.length) return;
   navigator.clipboard.writeText(msgs.join('\n\n──────────────────\n\n')).then(() => {
     btn.textContent = '✓ 복사됨!';
