@@ -432,12 +432,12 @@ function render() {
   });
 }
 
-renderFilterBtns();
-render();
-
 // 다중선택
 let multiMode = false;
 const selectedMsgs = new Set();
+
+renderFilterBtns();
+render();
 
 function toggleMulti() {
   multiMode = !multiMode;
