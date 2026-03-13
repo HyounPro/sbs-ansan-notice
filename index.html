@@ -324,8 +324,10 @@ function fmt(dateStr) {
   return `${m}.${d}`;
 }
 
+const FOOTER = `\n다양한 학원 소식을 인스타 팔로우 후 확인해보세요 :D\n▶ 학원 인스타그램 : https://www.instagram.com/sbsacademy_ansan/\n▶ 격일시간표 : https://hyounpro.github.io/sbs-ansan-schedule/\n★ 개강안내 확인 후 답변 부탁 드립니다!`;
+
 function makeMsg(c) {
-  return `■ SBS컴퓨터아트학원 안산점 개강안내\n· 수강과목 : ${c.subject}(${c.days})\n· 개강일 : ${fmt(c.start)}\n· 종강일 : ${fmt(c.end)}\n· 수강시간 : ${c.time}\n· 강의실 : 3층 ${c.room}강의장\n· 비대면링크 : ${discord[c.room]}\n· 대면/비대면 : 대면\n\n확인 후에 대면/비대면/참석 여부 확인 답장 부탁드립니다😊\n\n격일 수업 일정 확인 ↓\nhttps://hyounpro.github.io/sbs-ansan-schedule/`;
+  return `■ SBS아카데미안산 개강안내 ■\n\n· 수강과목 : ${c.subject}(${c.days})\n· 개강일 : ${fmt(c.start)}\n· 종강일 : ${fmt(c.end)}\n· 수강시간 : ${c.time}\n· 강의실 : 3층 ${c.room}강의장\n· 비대면링크 : 강의장별 상이\n· 대면/비대면 : 대면\n· 특이사항 : -`;
 }
 
 function setMode(mode, btn) {
@@ -363,7 +365,7 @@ function getFiltered() {
 }
 
 function copyText(text, btn) {
-  navigator.clipboard.writeText(text).then(() => {
+  navigator.clipboard.writeText(text + FOOTER).then(() => {
     btn.textContent = '✓ 복사됨!';
     btn.classList.add('copied');
     setTimeout(() => { btn.textContent = '📋 복사하기'; btn.classList.remove('copied'); }, 2000);
@@ -372,11 +374,12 @@ function copyText(text, btn) {
 
 function copyAll(btn) {
   const filtered = getFiltered();
-  const all = filtered.map(c => makeMsg(c)).join('\n\n' + '─'.repeat(28) + '\n\n');
+  const body = filtered.map(c => makeMsg(c)).join('\n\n──────────────────\n\n');
+  const all = body + FOOTER;
   navigator.clipboard.writeText(all).then(() => {
     btn.textContent = '✓ 전체 복사됨!';
     btn.classList.add('copied');
-    setTimeout(() => { btn.textContent = '📋 현재 목록 전체 복사'; btn.classList.remove('copied'); }, 2500);
+    setTimeout(() => { btn.textContent = '📋 전체 복사'; btn.classList.remove('copied'); }, 2500);
   });
 }
 
@@ -463,7 +466,8 @@ function clearSelection() {
 function copySelected(btn) {
   const msgs = [...selectedMsgs];
   if (!msgs.length) return;
-  navigator.clipboard.writeText(msgs.join('\n\n──────────────────\n\n')).then(() => {
+  const body = msgs.join('\n\n──────────────────\n\n');
+  navigator.clipboard.writeText(body + FOOTER).then(() => {
     btn.textContent = '✓ 복사됨!';
     btn.classList.add('copied');
     setTimeout(() => { btn.textContent = '📋 선택 복사'; btn.classList.remove('copied'); }, 2000);
