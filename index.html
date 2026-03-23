@@ -324,7 +324,7 @@ function fmt(dateStr) {
   return `${m}.${d}`;
 }
 
-const FOOTER = `\n\n다양한 학원 소식을 인스타 팔로우 후 확인해보세요 :D\n▶ 학원 인스타그램 : www.instagram.com/sbsacademy_ansan/\n▶ 격일시간표 : sbs-ansan-notice.co.kr\n\n★ 개강안내 확인 후 답변 부탁 드립니다!`;
+const FOOTER = `\n\n다양한 학원 소식을 인스타 팔로우 후 확인해보세요 :D\n▶ 학원 인스타그램 : instagram.com/sbsacademy_ansan\n▶ 격일시간표 : sbs-ansan-notice.co.kr\n\n★ 개강안내 확인 후 답변 부탁 드립니다!`;
 
 function makeMsg(c) {
   return `■ SBS아카데미안산 개강안내 ■\n\n· 수강과목 : ${c.subject}(${c.days})\n· 개강일 : ${fmt(c.start)}\n· 종강일 : ${fmt(c.end)}\n· 수강시간 : ${c.time}\n· 강의실 : 3층 ${c.room}강의장\n· 비대면링크 : ${discord[c.room]}\n· 대면/비대면 : 대면\n· 특이사항 : -`;
