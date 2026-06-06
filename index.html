@@ -192,9 +192,7 @@
 </header>
 
 <div class="mode-tabs">
-  <button class="mode-tab active" onclick="setMode('weekday4', this)">📅 4월 평일반</button>
-  <button class="mode-tab" onclick="setMode('weekend4', this)">🗓️ 4월 주말반</button>
-  <button class="mode-tab" onclick="setMode('weekday5', this)">📅 5월 평일반</button>
+  <button class="mode-tab active" onclick="setMode('weekday5', this)">📅 5월 평일반</button>
   <button class="mode-tab" onclick="setMode('weekend5', this)">🗓️ 5월 주말반</button>
 </div>
 
@@ -493,7 +491,7 @@ const weekend5Courses = [
   { subject: '전산응용건축제도', days: '토/일', room: 'G', time: '13:00~17:00', start: '2026-05-02', end: '2026-05-24' },
 ];
 
-let currentMode = 'weekday4';
+let currentMode = 'weekday5';
 let currentFilter = 'all';
 
 function getCourses() {
