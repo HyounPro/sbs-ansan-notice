@@ -192,10 +192,10 @@
 </header>
 
 <div class="mode-tabs">
-  <button class="mode-tab active" onclick="setMode('weekday6', this)">📅 6월 평일반</button>
-  <button class="mode-tab" onclick="setMode('weekend6', this)">🗓️ 6월 주말반</button>
-  <button class="mode-tab" onclick="setMode('weekday7', this)">📅 7월 평일반</button>
+  <button class="mode-tab active" onclick="setMode('weekday7', this)">📅 7월 평일반</button>
   <button class="mode-tab" onclick="setMode('weekend7', this)">🗓️ 7월 주말반</button>
+  <button class="mode-tab" onclick="setMode('weekday6', this)">📅 6월 평일반</button>
+  <button class="mode-tab" onclick="setMode('weekend6', this)">🗓️ 6월 주말반</button>
 </div>
 
 <main>
@@ -606,7 +606,7 @@ const weekend7Courses = [
   { subject: '컬러리스트-실기', days: '토/일', room: 'H', time: '13:00~16:00', start: '2026-06-20', end: '2026-07-12' },
 ];
 
-let currentMode = 'weekday6';
+let currentMode = 'weekday7';
 let currentFilter = 'all';
 
 function getCourses() {
